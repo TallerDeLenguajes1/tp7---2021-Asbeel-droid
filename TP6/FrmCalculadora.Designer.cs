@@ -47,6 +47,8 @@ namespace TP6
             this.btnMultiplicacion = new System.Windows.Forms.Button();
             this.btnDivision = new System.Windows.Forms.Button();
             this.btnIgual = new System.Windows.Forms.Button();
+            this.lstHistorial = new System.Windows.Forms.ListBox();
+            this.lblHistorial = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtPantalla
@@ -230,11 +232,32 @@ namespace TP6
             this.btnIgual.UseVisualStyleBackColor = true;
             this.btnIgual.Click += new System.EventHandler(this.btnIgual_Click);
             // 
+            // lstHistorial
+            // 
+            this.lstHistorial.FormattingEnabled = true;
+            this.lstHistorial.ItemHeight = 17;
+            this.lstHistorial.Location = new System.Drawing.Point(296, 51);
+            this.lstHistorial.Name = "lstHistorial";
+            this.lstHistorial.Size = new System.Drawing.Size(323, 208);
+            this.lstHistorial.TabIndex = 18;
+            this.lstHistorial.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstHistorial_MouseDoubleClick);
+            // 
+            // lblHistorial
+            // 
+            this.lblHistorial.AutoSize = true;
+            this.lblHistorial.Location = new System.Drawing.Point(296, 26);
+            this.lblHistorial.Name = "lblHistorial";
+            this.lblHistorial.Size = new System.Drawing.Size(56, 17);
+            this.lblHistorial.TabIndex = 19;
+            this.lblHistorial.Text = "Historial";
+            // 
             // FrmCalculadora
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(294, 332);
+            this.ClientSize = new System.Drawing.Size(641, 332);
+            this.Controls.Add(this.lblHistorial);
+            this.Controls.Add(this.lstHistorial);
             this.Controls.Add(this.btnIgual);
             this.Controls.Add(this.btnDivision);
             this.Controls.Add(this.btnMultiplicacion);
@@ -280,6 +303,8 @@ namespace TP6
         private System.Windows.Forms.Button btnMultiplicacion;
         private System.Windows.Forms.Button btnDivision;
         private System.Windows.Forms.Button btnIgual;
+        private System.Windows.Forms.ListBox lstHistorial;
+        private System.Windows.Forms.Label lblHistorial;
     }
 }
 

@@ -16,11 +16,13 @@ namespace TP6
         Calculadora calculo = new Calculadora(0,0);
         char operador;
         int extraerDesdeAqui;
+        LinkedList<string> lista;
+        string operacion;
 
         public FrmCalculadora()
         {
             InitializeComponent();
-
+            lista = new LinkedList<string>(); // tp7
         }
         // este metodo lo agrego en el evento de cada numero
         private void agregarNumero(object sender, EventArgs evento)
@@ -76,6 +78,7 @@ namespace TP6
                 String n2 = txtPantalla.Text;
                 n2 = n2.Substring(extraerDesdeAqui); // Esta linea Extrae desde el primer numero 
                 calculo.Numero2 = Convert.ToSingle(n2); // Luego tomamos el segundo mumero con el signo incluido  xq ToSingle se la re banca uwu
+                escribirOperacion(txtPantalla.Text);//tp7
                 switch (operador)
                 {
                     case '+':
@@ -95,7 +98,7 @@ namespace TP6
                     case '/':
                         if (calculo.Numero2 != 0)
                         {
-                            calculo.Numero1 = calculo.Suma();
+                            calculo.Numero1 = calculo.Division();
                             txtPantalla.Text = Convert.ToString(calculo.Numero1);
                         }
                         else
@@ -108,6 +111,40 @@ namespace TP6
                         MessageBox.Show("ERROR, nose que paso :c");
                         break;
                 }
+                guardarHisrotial();//tp7 Aqui guardamos y pubicamos el historial
+                ActualizarHistorial();//tp7
+            }
+        }
+
+        private void escribirOperacion(string text)//tp7
+        {
+            this.operacion = text;
+        }
+
+        private void guardarHisrotial()//tp7
+        {
+            DateTime t = DateTime.Now;
+            lista.AddFirst(t +"-->"+this.operacion+"="+ calculo.Numero1);
+        }
+        private void ActualizarHistorial()//tp7
+        {
+            // Añado como primer item el primer elemento de la lista de calculadoras
+            lstHistorial.Items.Insert(0, lista.First.Value.ToString());
+        }
+        private void lstHistorial_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int indice = lstHistorial.SelectedIndex;
+            LinkedListNode<string> nodo = lista.First;
+
+            // Si hacemos doble click sobre la listbox y no hay elemento seleccionado, el método SelectedIndex devuelve -1
+            if (indice != -1)
+            {
+                lstHistorial.Items.RemoveAt(indice);
+                // Como la lista y el listbox tienen los mismos elementos y ordenados de la misma manera
+                // avanzo tantos nodos como sea el valor del indice seleccionado por el usuario y lo saco de la lista
+                for (int i = 0; i < indice; i++)
+                    nodo = nodo.Next;
+                lista.Remove(nodo);
             }
         }
 
